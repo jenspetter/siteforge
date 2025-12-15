@@ -33,12 +33,12 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: "Run generation process"
       run: |
-        python src/gen.py --output "..\.build"
+        python src/gen.py --output "..\_build"
     - name: Upload static files as artifact
       id: deployment
       uses: actions/upload-pages-artifact@v3
       with:
-        path: .build\
+        path: _build/
   
   deploy:
     environment:
