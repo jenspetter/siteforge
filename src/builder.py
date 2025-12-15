@@ -12,7 +12,8 @@ def load_data():
     """
 
     info = json.load(open("data/info.json"))
-    return info
+    projects = json.load(open("data/projects.json"))
+    return projects, info
 
 def render(template_name, **args):
     """ Get a jinja2 template and render it by passing through arguments
@@ -34,6 +35,6 @@ def build_site():
     """ Build the site
     """
 
-    (info) = load_data()
-    index_html = render("home.html", info=info, Banner=info["Banner"])
+    (projects, info) = load_data()
+    index_html = render("home.html", Info=info, Banner=info["Banner"], Projects=projects)
     write("../index.html", index_html)
