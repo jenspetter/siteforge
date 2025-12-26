@@ -5,3 +5,13 @@
     background-image: url("../assets/banner.png");
     background-size: cover;
 }
+.project-attributes li {
+    background-color: gainsboro;
+    border-color: transparent;
+    border-radius: 2px;
+    text-align: center;
+    padding: 2px;
+    padding-left: 7px;
+    padding-right: 7px;
+    margin: 5px;
+}
