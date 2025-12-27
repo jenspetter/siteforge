@@ -12,8 +12,8 @@ def load_data():
     """ Load json data
     """
 
-    info = json.load(open("data/info.json", encoding="utf-8"))
-    projects = json.load(open("data/projects.json", encoding="utf-8"))
+    info = json.load(open("data/content/info.json", encoding="utf-8"))
+    projects = json.load(open("data/content/projects.json", encoding="utf-8"))
     return projects, info
 
 def render(template_name, **args):
