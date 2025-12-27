@@ -9,12 +9,7 @@
   <title>{{Info.Title}}</title>
 {% endblock head %}
 {% block body %}
-  <div class="container intro">
-    <div class="jumbotron jumbotron-fluid jumbotron-intro text-center">
-      <h1 class="display-4">{{Banner.Title}}</h1>
-      <p class="lead">{{Banner.Description}}</p>
-    </div>
-  </div>
+  {% include 'banner.html' %}
 
   <div class="album py-5 bg-light" id="portfolio">
     <div class="container text-center">
@@ -45,35 +40,9 @@
     </div>
   </div>
 
-  <div class="album py-5" id="about">
-    <div class="container jumbotron-about">
-      <h1 class="text-center">About <span>me</span></h1>
-      <hr>
-      <div class="row">
-        <div class="col-sm-2">
-          <img src="{{Info.About.Image}}" class="img-fluid" alt="Responsive image">
-        </div>
-        <div class="col-sm-10">
-          {% for el in Info.About.Content %}{{el}}{% endfor %}
-        </div>
-      </div>
-    </div>
-  </div>
+  {% include 'about.html' %}
 
-  <div class="album py-5 bg-light">
-    <div class="container text-center jumbotron-contact">
-      <h1>Let's have a <span>chat</span>!</h1>
-      <hr>
-      {% for el in Info.Contact.Content %}{{el}}{% endfor %}
-    </div>
-  </div>
+  {% include 'contact.html' %}
 
-  <footer class="text-muted bg-light">
-    <div class="container jumbotron-footer">
-      <p class="float-right">
-        <a href="#">Back to top</a>
-      </p>
-      <p>Copyright © {{Info.Year}} Jens Petter | {{Banner.Description}}</p>
-    </div>
-  </footer>
+  {% include 'footer.html' %}
 {% endblock body %}
