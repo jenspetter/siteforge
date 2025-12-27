@@ -4,6 +4,10 @@ span {
 .intro {
     margin-top:2%;   
 }
+.jumbotron-footer p {
+    padding: 10px;
+    margin: 0%;
+}
 .jumbotron-intro {
     background-image: url("../assets/banner.png");
     background-size: cover;
