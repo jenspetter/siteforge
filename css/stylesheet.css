@@ -1,6 +1,9 @@
 span {
     color: #007bff;
 }
+button {
+    border-radius: 0%;
+}
 .intro {
     margin-top:2%;   
 }
@@ -12,6 +15,15 @@ span {
     background-image: url("../assets/banner.png");
     background-size: cover;
 }
+.jumbotron-intro button {
+    background-color: transparent;
+    border-radius: 0%;
+    border-color: slategray;
+}
+a {
+    color: black;
+    text-decoration: none;
+}
 .project-attributes li {
     background-color: gainsboro;
     border-color: transparent;
@@ -21,6 +33,20 @@ span {
     padding-left: 7px;
     padding-right: 7px;
     margin: 5px;
+}
+.project-item a:hover {
+    cursor: pointer;
+}
+.project-attributes-view li {
+    background-color: gainsboro;
+    border-color: transparent;
+    border-radius: 2px;
+    text-align: center;
+    padding: 2px;
+    padding-left: 7px;
+    padding-right: 7px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 .jumbotron-about {
     margin-top: 1%;
@@ -36,4 +62,7 @@ span {
     padding-left: 15px;
     padding-right: 15px;
     margin: 0%;
+}
+.modal-body ul li {
+    margin-bottom: 10px;
 }
