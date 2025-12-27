@@ -11,5 +11,11 @@
             "<p>In my spare time I like to always challenge myself to become better at programming. I like playing the guitar in my spare time as well and I do some fitness to keep myself healthy.</p>",
             "<p>Come say hi on <a href=\"https://www.linkedin.com/in/jens-petter-97a0a0a9/\" target=\"_blank\">LinkedIn</a>! I love talking tech.</p>"
         ]
+    },
+    "Contact": {
+        "Content":[
+            "<p>I'm always happy to talk! Feel free to contact me at any time.</p>",
+            "<a type=\"button\" class=\"btn btn-outline-primary\" href=\"https://www.linkedin.com/in/jens-petter-97a0a0a9/\" target=\"_blank\">Contact me</a>"
+        ]
     }
 }
