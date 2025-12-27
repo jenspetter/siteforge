@@ -3,5 +3,13 @@
     "Banner": {
         "Title":"Jens Petter",
         "Description": "Game/CI/Tools-Programmer"
+    },
+    "About": {
+        "Image": "assets/about/me.jpg",
+        "Content": [
+            "<p>Hi! I’m Jens, a tools programmer with a focus on CI. I’ve got 8 years of game-dev study in the bag, where I am now focusing on making the best in-house tools to help and improve development of a project in any way shape or form.</p>",
+            "<p>In my spare time I like to always challenge myself to become better at programming. I like playing the guitar in my spare time as well and I do some fitness to keep myself healthy.</p>",
+            "<p>Come say hi on <a href=\"https://www.linkedin.com/in/jens-petter-97a0a0a9/\" target=\"_blank\">LinkedIn</a>! I love talking tech.</p>"
+        ]
     }
 }
