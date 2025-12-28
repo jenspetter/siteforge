@@ -36,5 +36,8 @@ class BuilderTests(unittest.TestCase):
         # Loading from a path with invalid formatted data (not .json) should return an empty collection
         self.assertEqual(builder.load_data("../tests/resources/wrong_format"), {})
 
+    def test_failing_on_purpose(self):
+        self.assertEqual(1, 2)
+
 if __name__ == '__main__':
     unittest.main()
