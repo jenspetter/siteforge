@@ -1,0 +1,10 @@
+[
+    {
+        "template": "GreatTemplate",
+        "output": "index.html"
+    },
+    {
+        "template": "GreatTemplate",
+        "output": "coolproject.html"
+    }
+]

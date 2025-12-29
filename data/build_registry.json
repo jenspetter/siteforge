@@ -1,0 +1,6 @@
+[
+    {
+        "template": "home.html",
+        "output": "index.html"
+    }
+]

@@ -36,5 +36,31 @@ class BuilderTests(unittest.TestCase):
         # Loading from a path with invalid formatted data (not .json) should return an empty collection
         self.assertEqual(builder.load_data("../tests/resources/wrong_format"), {})
 
+    def test_load_build_registry(self):
+        # Loading a build registry collection
+        result = builder.load_build_registry("../tests/resources/build_registry/simple.json")
+        expected = [{'template': 'GreatTemplate', 'output': 'index.html'}, {'template': 'GreatTemplate', 'output': 'coolproject.html'}]
+        self.assertEqual(result, expected)
+
+    def test_load_build_registry_empty(self):
+        # Loading nothing should return an empty collection
+        self.assertEqual(builder.load_build_registry(""), {})
+
+    def test_load_build_registry_not_existing_path(self):
+        # Loading a file that cannot be found should return an empty collection
+        self.assertEqual(builder.load_build_registry("../tests/resources/build_registry/not_existing_hopefully.json"), {})
+
+    def test_load_build_registry_unknown_key(self):
+        # Loading a file that contains an entry that is unknown should return an empty collection
+        self.assertEqual(builder.load_build_registry("../tests/resources/build_registry/extra_unknown_key.json"), {})
+
+    def test_load_build_registry_missing_template(self):
+        # Loading a file with a missing 'template' key. Should return an empty collection
+        self.assertEqual(builder.load_build_registry("../tests/resources/build_registry/missing_template_key.json"), {})
+
+    def test_load_build_registry_missing_output(self):
+        # Loading a file with a missing 'output' key. Should return an empty collection
+        self.assertEqual(builder.load_build_registry("../tests/resources/build_registry/missing_output_key.json"), {})
+
 if __name__ == '__main__':
     unittest.main()
