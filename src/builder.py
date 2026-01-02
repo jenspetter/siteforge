@@ -8,6 +8,10 @@ BUILD_REGISTRY_PATH = "../data/build_registry.json"
 BUILD_REGISTRY_EXPECTED_VAR_TEMPLATE_NOTATION = "template"
 BUILD_REGISTRY_EXPECTED_VAR_OUTPUT_NOTATION = "output"
 
+ASSET_REGISTRY_PATH = "../data/asset_registry.json"
+ASSET_REGISTRY_EXPECTED_VAR_SOURCE_NOTATION = "Source"
+ASSET_REGISTRY_EXPECTED_VAR_DESTINATION_NOTATION = "Destination"
+
 CONTENT_PATH = "../data/content"
 
 """ Containing functionality to build the website
@@ -40,13 +44,12 @@ def load_data(content_path):
 
     return data
 
-def load_build_registry(path):
+def _validate_registry(path, required_properties):
     """
-    Loading build registry data\n
-    Build registry data being data that defines what to build and how to build it\n
-    We both load and validate the data. The data requiring to be a .json file
+    Validate the json format of a registry
     
-    :param path: Path to the build registry file.
+    :param path: The path to the json file containing the registry
+    :param required_properties: Required properties that all entries in the registry should adhere to
     """
 
     if path == "":
@@ -62,29 +65,48 @@ def load_build_registry(path):
         print("Failed to load build registry at path '"  + path + "' as the file isn't a valid .json file")
         return {}
     
-    data = json.load(open(path, encoding="utf-8"))
+    with open(path, 'r', encoding="utf-8") as f:
+        data = json.load(f)
 
-    expected_keys = {BUILD_REGISTRY_EXPECTED_VAR_TEMPLATE_NOTATION, BUILD_REGISTRY_EXPECTED_VAR_OUTPUT_NOTATION}
     for entry in data:
-        if not BUILD_REGISTRY_EXPECTED_VAR_TEMPLATE_NOTATION in entry:
-            print('Missing required entry: ', BUILD_REGISTRY_EXPECTED_VAR_TEMPLATE_NOTATION)
-            print("Value: ", entry)
-            return {}
+        # Check if all required propereties exist
+        for required_property in required_properties:
+            if not required_property in entry:
+                print('Missing required entry: ', required_property)
+                print("Value: ", entry)
+                return {}
 
-        if not BUILD_REGISTRY_EXPECTED_VAR_OUTPUT_NOTATION in entry:
-            print('Missing required entry: ', BUILD_REGISTRY_EXPECTED_VAR_OUTPUT_NOTATION)
-            print("Value: ", entry)
-            return {}
-
-        unexpected = set(entry) - expected_keys
+        unexpected = set(entry) - required_properties
         if(unexpected):
             print("Failed to load build registry at path '" + path + "' as (an) unexpected key(s) were found")
-            print("Expected key(s): ", expected_keys)
+            print("Expected key(s): ", required_properties)
             print("Unexpected key(s): ", unexpected)
             print("Value: ", entry)
             return {}
 
     return data
+
+def load_build_registry(path):
+    """
+    Loading build registry data\n
+    Build registry data being data that defines what to build and how to build it\n
+    We both load and validate the data. The data requiring to be a .json file
+    
+    :param path: Path to the build registry file.
+    """
+
+    return _validate_registry(path, {BUILD_REGISTRY_EXPECTED_VAR_TEMPLATE_NOTATION, BUILD_REGISTRY_EXPECTED_VAR_OUTPUT_NOTATION})
+
+def load_asset_registry(path):
+    """
+    Loading asset registry data\n
+    Asset registry data being data that defines what to copy over as asset data to the output directory of the build\n
+    We both load and validate the data. The data requiring to be a .json file
+    
+    :param path: Path to the asset registry file.
+    """
+
+    return _validate_registry(path, {ASSET_REGISTRY_EXPECTED_VAR_SOURCE_NOTATION, ASSET_REGISTRY_EXPECTED_VAR_DESTINATION_NOTATION})
 
 def render(template_name, **args):
     """ Get a jinja2 template and render it by passing through arguments
@@ -115,10 +137,11 @@ def build_site(output_dir):
 
     content = load_data(CONTENT_PATH)
     build_registry = load_build_registry(BUILD_REGISTRY_PATH)
+    asset_registry = load_asset_registry(ASSET_REGISTRY_PATH)
 
     for build_entry in build_registry:
         template = render(build_entry[BUILD_REGISTRY_EXPECTED_VAR_TEMPLATE_NOTATION], **{k.capitalize(): v for k, v in content.items()})
         write(os.path.join(output_dir, build_entry[BUILD_REGISTRY_EXPECTED_VAR_OUTPUT_NOTATION]), template)
 
-    copy("../assets", os.path.join(output_dir, "assets"))
-    copy("../css", os.path.join(output_dir, "css"))
+    for asset_entry in asset_registry:
+        copy(asset_entry[ASSET_REGISTRY_EXPECTED_VAR_SOURCE_NOTATION], os.path.join(output_dir, asset_entry[ASSET_REGISTRY_EXPECTED_VAR_DESTINATION_NOTATION]))

@@ -1,0 +1,10 @@
+[
+    {
+        "Source": "../assets",
+        "Destination": "assets"
+    },
+    {
+        "Source": "../css",
+        "Destination": "css"
+    }
+]
