@@ -34,6 +34,7 @@ jobs:
     - name: "Test with unittest package"
       run: |
         python tests/builder_tests.py
+        python tests/json_utils_tests.py
     - name: "Run generation process"
       run: |
         python src/gen.py --output "../_build"
