@@ -86,3 +86,46 @@ def load_container(path, required_properties = []):
                 return {}
 
     return data
+
+def _get_objects_with_key(json, key):
+    """
+    Setup to recursively search (part of) the input json that has the input key
+    
+    :param json: The input json
+    :param key: The requested key
+    """
+
+    if isinstance(json, dict):
+        for k, v in json.items():
+            if k == key:
+                yield json
+            else:
+                yield from _get_objects_with_key(v, key)
+    elif isinstance(json, list):
+        for item in json:
+            yield from _get_objects_with_key(item, key)
+
+def get_filtered_objects(json, filter):
+    """
+    Get (part of) the input json based on a key-value filter
+    
+    :param json: The input json
+    :param filter: The filter, has to be of the JSonFilter type
+    """
+
+    if not isinstance(json, object):
+        print("Failed to get filtered json object as the json passed through is not an object")
+        return []
+
+    if not isinstance(filter, JsonFilter):
+        print("Failed to get filtered json object as one of the filtered items passed through is not a filter")
+        return []
+
+    result = list(_get_objects_with_key(json, filter.key))
+    matching_result = []
+
+    for r in result:
+        if r[filter.key] == filter.value:
+            matching_result.append(r)
+
+    return matching_result

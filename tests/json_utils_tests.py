@@ -10,7 +10,7 @@ import json_utils
 """
 Tests for json_utils.py
 """
-class BuilderTests(unittest.TestCase):
+class JsonUtilsTests(unittest.TestCase):
 
     # JSonFilter
 
@@ -70,6 +70,90 @@ class BuilderTests(unittest.TestCase):
     def test_load_container_missing_required_key(self):
         # Loading a file that must contain a specific key that isn't there, which should result in an empty container
         self.assertEqual(json_utils.load_container("../tests/resources/build_registry/simple.json", ["requiredKey"]), {})
+
+    # get_filtered_objects
+
+    def test_get_filtered_objects_matching_key_value(self):
+        json = {
+            'key': 'value',
+            'AnotherKey': 'AnotherValue'
+        }
+
+        result = json_utils.get_filtered_objects(json, json_utils.JsonFilter(key="key", value="value"))
+
+        self.assertEquals(len(result), 1)
+        self.assertEqual(result[0], json)
+
+    def test_get_filtered_objects_matching_key_value_half(self):
+        json = [
+            {
+                'key': 'value',
+                'AnotherKey': 'AnotherValue'
+            },
+            {
+                'IncorrectKey': 'value',
+                'DifferentKey': 'DifferentValue'
+            }
+        ]
+
+        result = json_utils.get_filtered_objects(json, json_utils.JsonFilter(key="key", value="value"))
+
+        self.assertEquals(len(result), 1)
+        self.assertEqual(result[0], json[0])
+
+    def test_get_filtered_objects_matching_key_value_multiple(self):
+        json = [
+            {
+                'key': 'value',
+                'AnotherKey': 'AnotherValue'
+            },
+            {
+                'key': 'value',
+                'DifferentKey': 'DifferentValue'
+            }
+        ]
+
+        result = json_utils.get_filtered_objects(json, json_utils.JsonFilter(key="key", value="value"))
+
+        self.assertEquals(len(result), 2)
+        self.assertEqual(result[0], json[0])
+        self.assertEqual(result[1], json[1])
+
+    def test_get_filtered_objects_not_matching_key(self):
+        json = {
+            'key': 'value',
+            'AnotherKey': 'AnotherValue'
+        }
+
+        result = json_utils.get_filtered_objects(json, json_utils.JsonFilter(key="incorrectKey", value="value"))
+
+        self.assertEquals(len(result), 0)
+
+    def test_get_filtered_objects_not_matching_value(self):
+        json = {
+            'key': 'value',
+            'AnotherKey': 'AnotherValue'
+        }
+
+        result = json_utils.get_filtered_objects(json, json_utils.JsonFilter(key="key", value="incorrectValue"))
+
+        self.assertEquals(len(result), 0)
+
+    def test_get_filtered_objects_none_json(self):
+        json = None
+        result = json_utils.get_filtered_objects(json, json_utils.JsonFilter(key="key", value="value"))
+
+        self.assertEquals(result, [])
+
+    def test_get_filtered_objects_none_filter(self):
+        json = {
+            'key': 'value',
+            'AnotherKey': 'AnotherValue'
+        }
+
+        result = json_utils.get_filtered_objects(json, None)
+
+        self.assertEquals(result, [])
 
 if __name__ == '__main__':
     unittest.main()
