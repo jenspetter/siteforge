@@ -1,5 +1,7 @@
 import os
 import shutil
+import json_function_registration
+import json_functions
 import json_utils as JsonUtils
 from jinja2 import Environment, FileSystemLoader
 
@@ -18,6 +20,50 @@ CONTENT_PATH = "../data/content"
     """
 
 env = Environment(loader=FileSystemLoader("templates"))
+
+def load_content(path):
+    """
+    Loading content from a path\n
+    The content being the data used reference in templating
+    
+    :param path: The path to the content files. Expected to be a path to a directory
+    """
+
+    # Load content from json first
+    content = JsonUtils.load_objects(path)
+
+    # Ressolve tokens in json content
+    # Tokens can be:
+    # - A method reference
+    def _process_content_value(value):
+        if isinstance(value, dict) and "$func" in value:
+            name = value["$func"]
+
+            if name not in json_function_registration.JSON_FUNCTION_REFERENCES:
+                print("Content value referenced a function but the function can not be found. Is it imported?")
+                print("Continuing by defining as unknown")
+                print("Value: ", value)
+                return "UNKNOWN_FUNCTION_RESSOLVE"
+            
+            func = json_function_registration.JSON_FUNCTION_REFERENCES[name]
+
+            args = [_process_content_value(v) for v in value.get("args", [])]
+            kwargs = {k: _process_content_value(v) for k, v in value.get("kwargs", {}).items()}
+
+            return func(*args, **kwargs)
+
+        if isinstance(value, dict):
+            return {k: _process_content_value(v) for k, v in value.items()}
+
+        if isinstance(value, list):
+            return [_process_content_value(v) for v in value]
+
+        return value
+    
+    for k, v in content.items():
+        content[k] = _process_content_value(v)
+
+    return content
 
 def load_build_registry(path):
     """
@@ -117,7 +163,7 @@ def build_site(output_dir):
     """
 
     # Load all data needed to build the site
-    content = JsonUtils.load_objects(CONTENT_PATH)
+    content = load_content(CONTENT_PATH)
     build_registry = load_build_registry(BUILD_REGISTRY_PATH)
     asset_registry = load_asset_registry(ASSET_REGISTRY_PATH)
 

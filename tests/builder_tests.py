@@ -6,11 +6,40 @@ import os
 sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/../src")
 
 import builder
+from json_function_registration import json_func
 
 """
 Tests for builder.py
 """
 class BuilderTests(unittest.TestCase):
+
+    # load_content
+    def test_load_content(self):
+        # Loading from a single data file
+        result = builder.load_content("../tests/resources/simple")
+        expected = {'data': {'String': 'String', 'Boolean': 'Bool', 'Integer': 'Int', 'Float': 'Float'}}
+        self.assertEqual(result, expected)
+
+    def test_load_content_with_func_zero(self):
+        result = builder.load_content("../tests/resources/content/func/zero")
+        expected = {'zero': {'zero': 0}}
+        self.assertEqual(result, expected)
+
+    def test_load_content_with_func_add(self):
+        result = builder.load_content("../tests/resources/content/func/add")
+        expected = {}
+        expected['add_args'] = {'add': 3}
+        expected['add_kwargs'] = {'add': 3}
+        self.assertEqual(result, expected)
+
+    # json test methods
+    @json_func
+    def zero():
+        return 0
+    
+    @json_func
+    def add(left, right):
+        return left + right
 
     # load_build_registry
 

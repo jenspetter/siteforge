@@ -1,0 +1,9 @@
+{
+    "add": {
+        "$func": "add",
+        "kwargs": {
+            "left": 1,
+            "right": 2
+        }
+    }
+}
