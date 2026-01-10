@@ -3,7 +3,7 @@ import unittest
 import sys
 import os
 
-sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/../src")
+sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/../siteforge")
 
 import builder
 from json_function_registration import json_func
