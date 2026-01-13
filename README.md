@@ -1,10 +1,9 @@
-# Portfolio
-This is my portfolio site, which is data driven generated from source.
-The main reason for this is to avoid having to add/remove/edit/duplicate html data and instead have everything auotmatically generate from data when running a generation command.
+# Siteforge
+Ever found yourself duplicating web pages/html content as pages in your site are very similar? Meet siteforge.
+Siteforge aims to tackle this by enabling to build up a site by using templating to generate the pages for your site, and use json as the content to your site.
 
-# Dependencies
-- [Python](https://www.python.org/) - for site generation
-- [Jinja2](https://jinja.palletsprojects.com/en/stable/) - templating
+# Installation
+WIP:
 
-# Run
-One can run the generation process by running gen.py
+# Usage
+WIP
