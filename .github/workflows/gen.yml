@@ -37,7 +37,7 @@ jobs:
         python tests/json_utils_tests.py
     - name: "Run generation process"
       run: |
-        python siteforge/gen.py --output "../_build"
+        python siteforge/gen.py --content_path "..\data\content" --build_registry_path "..\data\build_registry.json" --asset_registry_path "..\data\asset_registry.json"  --output "..\_build"
     - name: Upload static files as artifact
       id: deployment
       uses: actions/upload-pages-artifact@v3
