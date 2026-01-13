@@ -5,16 +5,12 @@ import json_functions
 import json_utils as JsonUtils
 from jinja2 import Environment, FileSystemLoader
 
-BUILD_REGISTRY_PATH = "../data/build_registry.json"
 BUILD_REGISTRY_EXPECTED_VAR_TEMPLATE_NOTATION = "template"
 BUILD_REGISTRY_EXPECTED_VAR_OUTPUT_NOTATION = "output"
 BUILD_REGISTRY_OPTIONAL_VAR_BOUNDCONTEXT_NOTATION = "boundContext"
 
-ASSET_REGISTRY_PATH = "../data/asset_registry.json"
 ASSET_REGISTRY_EXPECTED_VAR_SOURCE_NOTATION = "Source"
 ASSET_REGISTRY_EXPECTED_VAR_DESTINATION_NOTATION = "Destination"
-
-CONTENT_PATH = "../data/content"
 
 """ Containing functionality to build a website
     """
@@ -158,14 +154,14 @@ def write(path, content):
     with open(path, "w", encoding="utf-8") as f:
         f.write(content)
 
-def build_site(output_dir):
+def build_site(content_path, build_registry_path, asset_registry_path, output_dir):
     """ Build the site
     """
 
     # Load all data needed to build the site
-    content = load_content(CONTENT_PATH)
-    build_registry = load_build_registry(BUILD_REGISTRY_PATH)
-    asset_registry = load_asset_registry(ASSET_REGISTRY_PATH)
+    content = load_content(content_path)
+    build_registry = load_build_registry(build_registry_path)
+    asset_registry = load_asset_registry(asset_registry_path)
 
     # Build each registry entry
     for build_entry in build_registry:
