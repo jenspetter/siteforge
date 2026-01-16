@@ -1,0 +1,20 @@
+[project]
+name = "siteforge"
+version = "0.1.0"
+description = "Static site builder using json as input that binds to template site generation"
+authors = [
+  { name="Jens Petter" },
+]
+requires-python = ">=3.9"
+dependencies = [
+  "jinja2",
+  "markdown",
+  "pyyaml",
+]
+
+[tool.setuptools]
+py-modules = ['siteforge']
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
