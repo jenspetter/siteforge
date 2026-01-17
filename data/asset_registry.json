@@ -1,10 +1,10 @@
 [
     {
-        "Source": "../assets",
+        "Source": "assets",
         "Destination": "assets"
     },
     {
-        "Source": "../css",
+        "Source": "css",
         "Destination": "css"
     }
 ]

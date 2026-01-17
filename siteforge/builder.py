@@ -4,6 +4,7 @@ from . import json_function_registration
 from . import json_functions
 from . import json_utils as JsonUtils
 from jinja2 import Environment, FileSystemLoader
+from pathlib import Path
 
 BUILD_REGISTRY_EXPECTED_VAR_TEMPLATE_NOTATION = "template"
 BUILD_REGISTRY_EXPECTED_VAR_OUTPUT_NOTATION = "output"
@@ -141,8 +142,7 @@ def copy(location, to):
     """ Copy content from a location to another location
     """
 
-    location = os.path.join(os.path.dirname(__file__), location)
-    to = os.path.join(os.path.dirname(__file__), to)
+    location = Path(location).resolve()
     shutil.copytree(location, to, dirs_exist_ok=True)
 
 def write(path, content):
@@ -157,6 +157,8 @@ def write(path, content):
 def build_site(content_path, build_registry_path, asset_registry_path, output_dir):
     """ Build the site
     """
+
+    output_dir = Path(output_dir).resolve()
 
     # Load all data needed to build the site
     content = load_content(content_path)

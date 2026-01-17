@@ -31,7 +31,7 @@ def load_objects(path):
         print("Failed to load data as requested path is empty")
         return data
 
-    path = os.path.join(os.path.dirname(__file__), path)
+    path = str(Path(path).resolve())
     if not os.path.exists(path):
         print("Failed to load data as requested path does not exist")
         return data
@@ -60,7 +60,7 @@ def load_container(path, required_properties = []):
         print("Failed to load data as requested path is empty")
         return {}
     
-    path = os.path.join(os.path.dirname(__file__), path)
+    path = str(Path(path).resolve())
     if not os.path.exists(path):
         print("Failed to load json at path '" + path + "' as the file doesn't exist")
         return {}

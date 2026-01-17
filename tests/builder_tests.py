@@ -14,17 +14,17 @@ class BuilderTests(unittest.TestCase):
     # load_content
     def test_load_content(self):
         # Loading from a single data file
-        result = builder.load_content("../tests/resources/simple")
+        result = builder.load_content("tests/resources/simple")
         expected = {'data': {'String': 'String', 'Boolean': 'Bool', 'Integer': 'Int', 'Float': 'Float'}}
         self.assertEqual(result, expected)
 
     def test_load_content_with_func_zero(self):
-        result = builder.load_content("../tests/resources/content/func/zero")
+        result = builder.load_content("tests/resources/content/func/zero")
         expected = {'zero': {'zero': 0}}
         self.assertEqual(result, expected)
 
     def test_load_content_with_func_add(self):
-        result = builder.load_content("../tests/resources/content/func/add")
+        result = builder.load_content("tests/resources/content/func/add")
         expected = {}
         expected['add_args'] = {'add': 3}
         expected['add_kwargs'] = {'add': 3}
@@ -43,7 +43,7 @@ class BuilderTests(unittest.TestCase):
 
     def test_load_build_registry(self):
         # Loading a build registry collection
-        result = builder.load_build_registry("../tests/resources/build_registry/simple.json")
+        result = builder.load_build_registry("tests/resources/build_registry/simple.json")
         expected = [{'template': 'GreatTemplate', 'output': 'index.html'}, {'template': 'GreatTemplate', 'output': 'coolproject.html'}]
         self.assertEqual(result, expected)
 
@@ -53,21 +53,21 @@ class BuilderTests(unittest.TestCase):
 
     def test_load_build_registry_not_existing_path(self):
         # Loading a file that cannot be found should return an empty collection
-        self.assertEqual(builder.load_build_registry("../tests/resources/build_registry/not_existing_hopefully.json"), {})
+        self.assertEqual(builder.load_build_registry("tests/resources/build_registry/not_existing_hopefully.json"), {})
 
     def test_load_build_registry_missing_template(self):
         # Loading a file with a missing 'template' key. Should return an empty collection
-        self.assertEqual(builder.load_build_registry("../tests/resources/build_registry/missing_template_key.json"), {})
+        self.assertEqual(builder.load_build_registry("tests/resources/build_registry/missing_template_key.json"), {})
 
     def test_load_build_registry_missing_output(self):
         # Loading a file with a missing 'output' key. Should return an empty collection
-        self.assertEqual(builder.load_build_registry("../tests/resources/build_registry/missing_output_key.json"), {})
+        self.assertEqual(builder.load_build_registry("tests/resources/build_registry/missing_output_key.json"), {})
 
     # load_asset_registry
 
     def test_load_asset_registry(self):
         # Loading an asset registry collection
-        result = builder.load_asset_registry("../tests/resources/asset_registry/simple.json")
+        result = builder.load_asset_registry("tests/resources/asset_registry/simple.json")
         expected = [{'Source': 'assets', 'Destination': 'assets'}]
         self.assertEqual(result, expected)
 
@@ -77,15 +77,15 @@ class BuilderTests(unittest.TestCase):
 
     def test_load_asset_registry_not_existing_path(self):
         # Loading a file that cannot be found should return an empty collection
-        self.assertEqual(builder.load_asset_registry("../tests/resources/asset_registry/not_existing_hopefully.json"), {})
+        self.assertEqual(builder.load_asset_registry("tests/resources/asset_registry/not_existing_hopefully.json"), {})
 
     def test_load_asset_registry_missing_source(self):
         # Loading a file with a missing 'Source' key. Should return an empty collection
-        self.assertEqual(builder.load_asset_registry("../tests/resources/asset_registry/missing_source_key.json"), {})
+        self.assertEqual(builder.load_asset_registry("tests/resources/asset_registry/missing_source_key.json"), {})
 
     def test_load_asset_registry_missing_destination(self):
         # Loading a file with a missing 'Destination' key. Should return an empty collection
-        self.assertEqual(builder.load_asset_registry("../tests/resources/asset_registry/missing_destination_key.json"), {})
+        self.assertEqual(builder.load_asset_registry("tests/resources/asset_registry/missing_destination_key.json"), {})
 
     # get_processed_content_from_build_item
 
