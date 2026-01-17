@@ -13,6 +13,12 @@ dependencies = [
 [tool.setuptools]
 py-modules = ['siteforge']
 
+[tool.setuptools]
+package-dir = {"" = "siteforge"}
+
+[tool.setuptools.packages.find]
+where = ["siteforge"]
+
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
