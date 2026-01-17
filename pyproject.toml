@@ -3,7 +3,7 @@ name = "siteforge"
 version = "0.1.0"
 description = "Static site builder using json as input that binds to template site generation"
 authors = [
-  { name="Jens Petter" },
+  { name = "Jens Petter" }
 ]
 requires-python = ">=3.9"
 dependencies = [
@@ -11,13 +11,7 @@ dependencies = [
 ]
 
 [tool.setuptools]
-py-modules = ['siteforge']
-
-[tool.setuptools]
-package-dir = {"" = "siteforge"}
-
-[tool.setuptools.packages.find]
-where = ["siteforge"]
+packages = ["siteforge"]
 
 [build-system]
 requires = ["setuptools>=61.0"]
