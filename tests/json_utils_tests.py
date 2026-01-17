@@ -3,9 +3,7 @@ import unittest
 import sys
 import os
 
-sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/../siteforge")
-
-import json_utils
+from siteforge import json_utils
 
 """
 Tests for json_utils.py
@@ -81,7 +79,7 @@ class JsonUtilsTests(unittest.TestCase):
 
         result = json_utils.get_filtered_objects(json, json_utils.JsonFilter(key="key", value="value"))
 
-        self.assertEquals(len(result), 1)
+        self.assertEqual(len(result), 1)
         self.assertEqual(result[0], json)
 
     def test_get_filtered_objects_matching_key_value_half(self):
@@ -98,7 +96,7 @@ class JsonUtilsTests(unittest.TestCase):
 
         result = json_utils.get_filtered_objects(json, json_utils.JsonFilter(key="key", value="value"))
 
-        self.assertEquals(len(result), 1)
+        self.assertEqual(len(result), 1)
         self.assertEqual(result[0], json[0])
 
     def test_get_filtered_objects_matching_key_value_multiple(self):
@@ -115,7 +113,7 @@ class JsonUtilsTests(unittest.TestCase):
 
         result = json_utils.get_filtered_objects(json, json_utils.JsonFilter(key="key", value="value"))
 
-        self.assertEquals(len(result), 2)
+        self.assertEqual(len(result), 2)
         self.assertEqual(result[0], json[0])
         self.assertEqual(result[1], json[1])
 
@@ -127,7 +125,7 @@ class JsonUtilsTests(unittest.TestCase):
 
         result = json_utils.get_filtered_objects(json, json_utils.JsonFilter(key="incorrectKey", value="value"))
 
-        self.assertEquals(len(result), 0)
+        self.assertEqual(len(result), 0)
 
     def test_get_filtered_objects_not_matching_value(self):
         json = {
@@ -137,13 +135,13 @@ class JsonUtilsTests(unittest.TestCase):
 
         result = json_utils.get_filtered_objects(json, json_utils.JsonFilter(key="key", value="incorrectValue"))
 
-        self.assertEquals(len(result), 0)
+        self.assertEqual(len(result), 0)
 
     def test_get_filtered_objects_none_json(self):
         json = None
         result = json_utils.get_filtered_objects(json, json_utils.JsonFilter(key="key", value="value"))
 
-        self.assertEquals(result, [])
+        self.assertEqual(result, [])
 
     def test_get_filtered_objects_none_filter(self):
         json = {
@@ -153,7 +151,7 @@ class JsonUtilsTests(unittest.TestCase):
 
         result = json_utils.get_filtered_objects(json, None)
 
-        self.assertEquals(result, [])
+        self.assertEqual(result, [])
 
 if __name__ == '__main__':
     unittest.main()

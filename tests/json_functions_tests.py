@@ -4,9 +4,7 @@ import sys
 import os
 from datetime import datetime
 
-sys.path.append(os.path.dirname(os.path.realpath(__file__)) + "/../siteforge")
-
-import json_functions as funcs
+from siteforge import json_functions as funcs
 
 """
 Tests for json_functions.py
