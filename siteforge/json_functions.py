@@ -1,4 +1,4 @@
-from json_function_registration import json_func
+from .json_function_registration import json_func
 
 from datetime import datetime
 

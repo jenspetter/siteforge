@@ -1,8 +1,8 @@
 import os
 import shutil
-import json_function_registration
-import json_functions
-import json_utils as JsonUtils
+from . import json_function_registration
+from . import json_functions
+from . import json_utils as JsonUtils
 from jinja2 import Environment, FileSystemLoader
 
 BUILD_REGISTRY_EXPECTED_VAR_TEMPLATE_NOTATION = "template"

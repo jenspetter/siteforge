@@ -1,5 +1,5 @@
 import argparse
-from builder import build_site
+from siteforge.builder import build_site
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--content_path', type=str, required=True)
