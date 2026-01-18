@@ -187,4 +187,4 @@ def build_site(content_path, build_registry_path, asset_registry_path, output_di
  
     # Copy over each asset entry
     for asset_entry in asset_registry:
-        copy(asset_entry[ASSET_REGISTRY_EXPECTED_VAR_SOURCE_NOTATION], os.path.join(output_dir, asset_entry[ASSET_REGISTRY_EXPECTED_VAR_DESTINATION_NOTATION]))
+        copy(os.path.join(asset_registry_path, asset_entry[ASSET_REGISTRY_EXPECTED_VAR_SOURCE_NOTATION]), os.path.join(output_dir, asset_entry[ASSET_REGISTRY_EXPECTED_VAR_DESTINATION_NOTATION]))
