@@ -10,7 +10,7 @@ $ pip install siteforge
 ```
 
 # Example
-An example can be found on the source repo of Siteforge at https://github.com/jenspetter/siteforge
+An example on how to use Siteforge can be found on the source repo of Siteforge at https://github.com/jenspetter/siteforge
 
 # Usage
 An example usage of siteforge could be
